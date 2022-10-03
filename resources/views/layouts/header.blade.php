@@ -1,6 +1,6 @@
 <style>
     body {
-        min-height: 75rem;
+        
         padding-top: 3.5rem;
     }
 </style>
@@ -16,7 +16,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand d-none d-lg-block col-md-1" href="#"> <img
+            <a class="navbar-brand d-none d-lg-block col-md-1" href="{{route('welcome.home')}}"> <img
                     src="{{asset('img/logo.webp')}}"
                     alt="" class="d-inline-block align-text-top image-navbar mt-1 col-12"></a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -42,7 +42,7 @@
                     aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35" class="rounded-circle">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-start text-small">
+                <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end text-small">
                     <li><a class="dropdown-item" href="{{route('post.create')}}">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Criar Post</font>

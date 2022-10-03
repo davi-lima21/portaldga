@@ -21,6 +21,10 @@ Route::get('post/create', "App\Http\Controllers\PostController@create")->name("p
 Route::get('post/{id}', "App\Http\Controllers\PostController@show")->name("post.show");
 Route::post('post/store', "App\Http\Controllers\PostController@store")->name("post.store");
 
+Route::get('user/login', "App\Http\Controllers\UserController@login")->name("user.login");
+
+Route::post('interacaopost/store', "App\Http\Controllers\InteracaoPostController@store")->name("interacao_post.store");
+
 Route::prefix('/admin')->group(function(){
     Route::get('tipopost/index', "App\Http\Controllers\TipoPostController@index")->name("tipopost.index");
     

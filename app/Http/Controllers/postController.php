@@ -16,6 +16,8 @@ class postController extends Controller
     public function index()
     {
         //
+        try {
+        
         $posts = DB::select("SELECT posts.id, 
                                     posts.titulo, 
                                     posts.descricao, 
@@ -33,11 +35,47 @@ class postController extends Controller
                                     FROM posts INNER JOIN tipo_posts
                                     ON posts.tipo_posts_id = tipo_posts.id
                                     ORDER BY posts.created_at DESC LIMIT 3");
+        } catch (\Throwable $th) {
+            //throw $th;
+            $posts = [];
+            $posts_carousel = [];
+            return $this->indexMessage([$th->getMessage(), 'danger']);
+        }
 
        return view("welcome")->with('posts', $posts)->with('posts_carousel', $posts_carousel);
 
 
 
+    }
+
+    public function indexMessage($message)
+    {
+        //
+        //consulta utilizando o DB::SELECT
+        try {
+            //code...
+         $posts = DB::select("SELECT posts.id, 
+                                    posts.titulo, 
+                                    posts.descricao, 
+                                    posts.url_image, 
+                                    tipo_posts.tipo
+                            FROM posts INNER JOIN tipo_posts
+                            ON posts.tipo_posts_id = tipo_posts.id
+                            LIMIT 5");
+
+        $posts_carousel = DB::select("SELECT posts.id, 
+                                            posts.titulo, 
+                                            posts.descricao, 
+                                            posts.url_image, 
+                                            tipo_posts.tipo
+                                    FROM posts INNER JOIN tipo_posts
+                                    ON posts.tipo_posts_id = tipo_posts.id
+                                    ORDER BY posts.created_at DESC LIMIT 3");
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('welcome')->with('posts', [])->with('posts_carousel', [])->with('message', $message);
+        }
+        return view("welcome")->with('posts', $posts)->with('posts_carousel', $posts_carousel)->with('message', $message);
     }
 
     /**
@@ -85,7 +123,14 @@ class postController extends Controller
     {
         //
         $post = Post::find($id);
-        return view('Post/show')->with('post', $post);
+        $interacoes = DB::select('SELECT interacao_posts.id as id_interacao, comentario, interacao_posts.updated_at, 
+                                         interacao_posts.created_at, users.nome
+                                FROM interacao_posts
+                                INNER JOIN USERS
+                                ON interacao_posts.users_id = users.id
+                                WHERE posts_id = ?', [$id]);
+
+        return view('Post/show')->with('post', $post)->with('interacoes', $interacoes);
     }
 
     /**

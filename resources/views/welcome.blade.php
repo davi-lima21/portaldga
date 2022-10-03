@@ -212,6 +212,14 @@
         
     <div class="container mt-5">
 
+        @if (isset($message))
+                        
+                    <div id="msgErro" class="alert alert-{{$message[1]}} alert-dismissible fade show" role="alert">
+                        {{$message[0]}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    @endif
+
         <div class="row">
             <div id="carouselExampleIndicators" class="carousel slide col-lg-6" data-bs-ride="true">
                 <div class="carousel-indicators">
@@ -249,7 +257,7 @@
                             <a href="{{route('post.show', $posts_carousel[1]->id)}}" class="text-decoration-none mt-2 m-auto col-12 pb-2 rounded text-center text-light post">
                                 <div  class="col-12 m-auto fundo-image-destaque rounded shadow">
                                     <img class="col-12 rounded image-destaque"
-                                        src="{{$posts_carousel[1]->url_image}}""
+                                        src="{{$posts_carousel[1]->url_image}}"
                                         alt="">
                                 </div>
                                 <div class="row mt-2">
