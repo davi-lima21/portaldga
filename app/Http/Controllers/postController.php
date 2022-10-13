@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+use App\Models\Tutorial;
 use Illuminate\Support\Facades\Auth;
 
 class postController extends Controller
@@ -35,14 +36,17 @@ class postController extends Controller
                                     FROM posts INNER JOIN tipo_posts
                                     ON posts.tipo_posts_id = tipo_posts.id
                                     ORDER BY posts.created_at DESC LIMIT 3");
+
+            $tutoriais = DB::select('SELECT * FROM tutorials LIMIT 3');
         } catch (\Throwable $th) {
             //throw $th;
             $posts = [];
             $posts_carousel = [];
+            $tutoriais = [];
             return $this->indexMessage([$th->getMessage(), 'danger']);
         }
 
-        return view("welcome")->with('posts', $posts)->with('posts_carousel', $posts_carousel);
+        return view("welcome")->with('posts', $posts)->with('posts_carousel', $posts_carousel)->with('tutoriais', $tutoriais);
     }
 
     public function indexMessage($message)

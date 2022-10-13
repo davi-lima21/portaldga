@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <style>
+        .img_tutoriais{
+            min-height: 10rem;
+        }
+        
+    </style>
     <div class="container my-5">
 
         @if (isset($message))
@@ -9,7 +16,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="my-3">
+        {{-- <div class="my-3">
 
             <form class="d-flex" role="search">
                 <div class="input-group">
@@ -26,7 +33,7 @@
                     <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-        </div>
+        </div> --}}
 
 
         <div class="row">
@@ -181,50 +188,21 @@
     </div>
 
 
-    <h2 class="text-light">Mais acessados</h2>
+    <h2 class="text-light my-5">Tutoriais</h2>
 
-    <div class="bg-green mt-2 col-md-5 col-12 pb-2 rounded text-center shadow-lg text-light post">
-        <div class="col-12 fundo-image rounded-top"
-            style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5jjoGFsJEbuqEjEGSKgpijeFlLj56nhe6mA&usqp=CAU');">
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-11 col-11 m-auto my-auto">
-
-                <div class="col-4">
-                    <div class="row">
-                        <!-- <a href="perfil.php?action=show&id=" class="col-2"><img src="il'] ?>" alt="img_perfil" class="col-12 rounded-circle img_perfil"></a> -->
-
-                        <a href="#!"
-                            class="col-8 mt-1 text-decoration-none text-start link-light username">@usuario</a>
-                    </div>
-                </div>
-                <hr>
-                <div class="text-start">
-                    <h2 class="titulo-post">Post teste</h2>
-                </div>
-
-                <!-- <div class="col-md-8 col-8 m-auto">
-                            <img src="" alt="img_post" class="img_post col-12 rounded-circle">
-                        </div> -->
-                <div class="descricao text-start col-sm-7 col-12">
-                    Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem
-                    Ipsum
-                    tem sido o texto fictício padrão da indústria desde os anos 1500, quando um impressor
-                    desconhecido
-                    pegou uma cozinha de tipos e embaralhou-a para fazer um livro de espécimes de tipos. Ele
-                    sobreviveu
-                    não apenas cinco séculos, mas também o salto para a composição eletrônica, permanecendo
-                    essencialmente inalterado. Foi popularizado na década de 1960 com o lançamento de folhas
-                    Letraset
-                    contendo passagens de Lorem Ipsum e, mais recentemente, com software de editoração eletrônica
-                    como
-                    Aldus PageMaker, incluindo versões de Lorem Ipsum.
-                </div>
-                <div class="text-start"><a class=" text-decoration-none link-light ver-mais" href="#!">Ver
-                        mais</a></div>
-            </div>
-
-        </div>
+    <div class="row">
+    @foreach ($tutoriais as $tutorial)
+    <div class="col-md-5 shadow-lg m-auto rounded">
+        <a class="col-3 text-decoration-none text-light text-center" href="">
+            <h3 class="col-12">{{$tutorial->titulo}}</h3>
+            <iframe class="rounded col-12" height="300"
+            src="{{$tutorial->url_video}}">
+            </iframe>
+        </a>
     </div>
+    @endforeach
+</div>
+
+    
     </div>
 @endsection

@@ -165,6 +165,9 @@
                             @endif
                         @else
                         <li class="nav-item">
+                            <a class="nav-link" href="#">Tutoriais</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#">Blog</a>
                         </li>
                             <li class="nav-item dropdown">
@@ -173,7 +176,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('post.create') }}">
                                         Criar Post
