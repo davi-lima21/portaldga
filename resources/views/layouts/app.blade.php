@@ -165,10 +165,10 @@
                             @endif
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Tutoriais</a>
+                            <a class="nav-link" href="{{route('tutorial.index')}}">Tutoriais</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link" href="{{route('blog.index')}}">Blog</a>
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -183,6 +183,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('post_my.index', Auth::user()->id) }}">
                                         Meus posts
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('userinfo.show', Auth::user()->id) }}">
+                                        Meu perfil
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

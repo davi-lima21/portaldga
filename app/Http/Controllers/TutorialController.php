@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 use App\Models\Tutorial;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TutorialController extends Controller
 {
+    
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +29,6 @@ class TutorialController extends Controller
      */
     public function create()
     {
-        //
         return view('Tutorial/create');
     }
 
@@ -56,10 +60,7 @@ class TutorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.

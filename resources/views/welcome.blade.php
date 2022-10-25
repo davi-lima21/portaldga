@@ -1,14 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-
     <style>
-        .img_tutoriais{
+        .img_tutoriais {
             min-height: 10rem;
         }
-        
+
+        .post-2:hover,
+        .post-2:focus {
+            background: rgb(0, 0, 0);
+            background: linear-gradient(351deg, rgba(0, 0, 0, 1) 0%, rgba(13, 68, 40, 1) 86%);
+        }
     </style>
     <div class="container my-5">
+
+        @guest
+            <div class="text-center">
+
+                <h2>Bem vindo ao portal tecnológico DGA Tech!</h2>
+                <div class="col-md-8 m-auto">
+                    Aqui você poderá cadastrar notícias, ver tutoriais, criar um perfil para acessar o nosso blog e acessar
+                    perfil de outros usuários
+                </div>
+            </div>
+            <hr>
+        @endguest
+
 
         @if (isset($message))
             <div id="msgErro" class="alert alert-{{ $message[1] }} alert-dismissible fade show" role="alert">
@@ -95,7 +112,7 @@
                             <a href="{{ route('post.show', $posts_carousel[2]->id) }}"
                                 class="text-decoration-none mt-2 m-auto col-12 pb-2 rounded text-center text-light post">
                                 <div class="col-12 m-auto fundo-image-destaque rounded shadow">
-                                    <img class="col-12 rounded image-destaque" src="{{ $posts_carousel[2]->url_image }}""
+                                    <img class="col-12 rounded image-destaque" src="{{ $posts_carousel[2]->url_image }}"
                                         alt="">
                                 </div>
                                 <div class="row mt-2">
@@ -147,8 +164,8 @@
                 <div class="col-md-12 mt-3 pb-2 rounded text-light mb-3 d-none d-lg-block">
                     <div class="row">
                         <!-- <a class="ms-3 col-md-4 fundo-image-destaque-2 rounded shadow"
-                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGg3-rhU96SKw0LFDR60KXUbdi3ymZlZ8Ucw&usqp=CAU');">
-                            </a> -->
+                                    style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGg3-rhU96SKw0LFDR60KXUbdi3ymZlZ8Ucw&usqp=CAU');">
+                                </a> -->
                         <a href="#!" class="ms-md-3 col-md-4 ">
                             <img class="image-destaque-2 rounded col-12"
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGg3-rhU96SKw0LFDR60KXUbdi3ymZlZ8Ucw&usqp=CAU'"
@@ -165,22 +182,22 @@
         </div>
     </div>
     <div class="row">
-        {{-- @foreach ($posts as $post)
-        <div class="col-md-6">
-            <a href="#!" class="text-decoration-none m-auto mt-2 me-md-3 h-100 p-5 text-bg-dark rounded-3 bg-green">
-                <h2 class="titulo-post-2"></h2>
-                <p class="descricao-post-2">{{$post->descricao}}</p>
-                <a href="#!" class="btn btn-outline-success">{{$post->tipo}}</a>
-            </a>
-        </div>
-        
-        @endforeach --}}
         @foreach ($posts as $post)
-            <a href="{{ route('post.show', $post->id) }}" class="text-decoration-none posts-2-h mt-3 col-md-6">
-                <div class="text-decoration-none bg-green h-100 p-5 posts-2 text-light rounded-3 col-12">
+        <?php
+            $data = explode(" ", $post->created_at);
+        ?>
+            <a href="{{ route('post.show', $post->id) }}" class="text-decoration-none  posts-2-h mt-3 col-md-6">
+                <div
+                    class="text-decoration-none bg-dark h-100 p-5 border border-success post-2 shadow-lg text-light rounded-3 col-12">
                     <h2 class="titulo-post-2">{{ $post->titulo }}</h2>
                     <p class="descricao-post-2">{{ $post->descricao }}</p>
-                    <button class="btn btn-outline-light" type="button">{{ $post->tipo }}</button>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-success" type="button">{{ $post->tipo }}</button>
+                        <button class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                    <div class="text-end float-end my-auto text-muted mt-2">
+                        {{$data[0]}}
+                    </div>
                 </div>
             </a>
         @endforeach
@@ -188,21 +205,23 @@
     </div>
 
 
+
+
     <h2 class="text-light my-5">Tutoriais</h2>
 
     <div class="row">
-    @foreach ($tutoriais as $tutorial)
-    <div class="col-md-5 shadow-lg m-auto rounded">
-        <a class="col-3 text-decoration-none text-light text-center" href="">
-            <h3 class="col-12">{{$tutorial->titulo}}</h3>
-            <iframe class="rounded col-12" height="300"
-            src="{{$tutorial->url_video}}">
-            </iframe>
-        </a>
+        @foreach ($tutoriais as $tutorial)
+            <div class="col-md-5 shadow m-auto rounded mt-2">
+                <a class="col-3 text-decoration-none text-light text-center"
+                    href="{{ route('tutorial.show', $tutorial->id) }}">
+                    <h3 class="col-12">{{ $tutorial->titulo }}</h3>
+                    <iframe class="rounded col-12" height="300" src="{{ $tutorial->url_video }}">
+                    </iframe>
+                </a>
+            </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 
-    
+
     </div>
 @endsection

@@ -23,10 +23,11 @@ class postController extends Controller
             $posts = DB::select("SELECT posts.id, 
                                     posts.titulo, 
                                     posts.descricao, 
+                                    posts.created_at,
                                     posts.url_image, 
                                     tipo_posts.tipo
-                            FROM posts INNER JOIN tipo_posts
-                            ON posts.tipo_posts_id = tipo_posts.id");
+                                FROM posts INNER JOIN tipo_posts
+                                ON posts.tipo_posts_id = tipo_posts.id");
 
             $posts_carousel = DB::select("SELECT posts.id, 
                                             posts.titulo, 
@@ -179,6 +180,7 @@ class postController extends Controller
         }
     }
 
+
     public function show_my($id)
     {
         if (Auth::check()) {
@@ -194,6 +196,25 @@ class postController extends Controller
                                 WHERE posts_id = ?', [$id]);
 
             return view('Post/show_my')->with('post', $post)->with('interacoes', $interacoes);
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function index_user($id_user)
+    {
+        if (Auth::check()) {
+
+            $posts = DB::select("SELECT posts.id, 
+                                    posts.titulo, 
+                                    posts.descricao, 
+                                    posts.url_image, 
+                                    posts.created_at,
+                                    posts.updated_at,
+                                    tipo_posts.tipo
+                            FROM posts INNER JOIN tipo_posts
+                            ON posts.tipo_posts_id = tipo_posts.id WHERE Users_id = ?", [$id_user]);
+            return view('PostUser/show')->with('posts', $posts);
         } else {
             return redirect()->route('login');
         }
