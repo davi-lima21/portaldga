@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card text-dark">
                 <div class="card-header">Admin Dashboard</div>
 
                 <div class="card-body">
@@ -18,8 +18,12 @@
                     <a href="#!" class="btn btn-outline-success">Gerenciar Posts</a>
                     <a href="{{url('/')}}" class="btn btn-outline-success">Voltar</a>
                 </div>
+                
+                W]cQ*{t%2dvAM204
+       
             </div>
         </div>
     </div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection

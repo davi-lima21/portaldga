@@ -7,8 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class TutorialUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
     public function index()
     {
 
